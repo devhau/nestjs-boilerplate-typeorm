@@ -17,25 +17,26 @@ export class ConfigService {
   private validateInput(parsedConfig: DotenvParseOutput) {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string()
-        // .valid(['development', 'production', 'test', 'provision'])
+        .valid('development', 'production', 'test', 'provision')
         .default('development'),
       DATABASE_TYPE: Joi.string()
-        // .valid([
-        //   'cockroachdb',
-        //   'cordova',
-        //   'mariadb',
-        //   'mongodb',
-        //   'mssql',
-        //   'mysql',
-        //   'nativescript',
-        //   'oracle',
-        //   'postgres',
-        //   'react-native',
-        //   'sqlite',
-        //   'sqljs',
-        // ])
+        .valid(
+          'cockroachdb',
+          'cordova',
+          'mariadb',
+          'mongodb',
+          'mssql',
+          'mysql',
+          'nativescript',
+          'oracle',
+          'postgres',
+          'react-native',
+          'sqlite',
+          'sqljs',
+        )
         .required(),
-      PORT: Joi.number().default(3000)
+      PORT: Joi.number().default(3000),
+      REDIS_URI: Joi.string().required().default('redis://127.0.0.1:6379')
       // API_AUTH_ENABLED: Joi.boolean()
       //   .required()
       //   .default(true),
